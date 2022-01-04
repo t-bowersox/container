@@ -18,5 +18,6 @@
     "watch": "tsc --watch",
     "build": "tsc",
     "lint": "eslint src",
+    "format": "prettier --write src",
   }
 }
