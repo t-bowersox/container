@@ -19,5 +19,6 @@
     "build": "tsc",
     "lint": "eslint src",
     "format": "prettier --write src",
+    "test": "jest --silent"
   }
 }
