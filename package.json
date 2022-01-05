@@ -1,4 +1,25 @@
 {
+  "name": "container",
+  "description": "A dependency injection container with a simple API.",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t-bowersox/container.git"
+  },
+  "keywords": [
+    "container",
+    "dependency injection",
+    "typescript",
+    "DI",
+    "ioc"
+  ],
+  "author": "t-bowersox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/t-bowersox/container/issues"
+  },
+  "homepage": "https://github.com/t-bowersox/container#readme",
   "type": "module",
   "devDependencies": {
     "@babel/core": "^7.16.7",
