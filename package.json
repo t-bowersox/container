@@ -9,8 +9,7 @@
   },
   "keywords": [
     "container",
-    "dependency",
-    "injection",
+    "dependency injection",
     "typescript",
     "DI",
     "ioc"
