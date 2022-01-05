@@ -1,9 +1,9 @@
-export type Constructor<T = unknown> = { new (...args: unknown[]): T };
-export type ServiceRegistry = WeakMap<Constructor, unknown[]>;
+export type Constructor<T = any> = { new (...args: any[]): T };
+export type ServiceRegistry = WeakMap<Constructor, any[]>;
 
 export class Container {
   private registry: ServiceRegistry;
-  private instances: WeakMap<Constructor, unknown>;
+  private instances: WeakMap<Constructor, any>;
 
   constructor() {
     this.registry = new WeakMap();
@@ -19,7 +19,7 @@ export class Container {
    * pass it to the constructor.
    * @returns The container object returns itself, allowing chaining multiple calls to `add()`.
    */
-  add<T extends Constructor>(newClass: T, ...args: unknown[]): Container {
+  add<T extends Constructor>(newClass: T, ...args: any[]): Container {
     this.registry.set(newClass, args);
     return this;
   }
@@ -33,10 +33,7 @@ export class Container {
    * pass it to the constructor.
    * @returns The container object returns itself, allowing chaining multiple calls to `add()`.
    */
-  addStatic<T extends Constructor>(
-    className: T,
-    ...args: unknown[]
-  ): Container {
+  addStatic<T extends Constructor>(className: T, ...args: any[]): Container {
     const instance = new className(...args);
     this.instances.set(className, instance);
     return this;
@@ -47,7 +44,7 @@ export class Container {
    * @param className The class to modify.
    * @param newArgs The new arguments to append to the existing arguments array.
    */
-  appendArgs(className: Constructor, ...newArgs: unknown[]): void {
+  appendArgs(className: Constructor, ...newArgs: any[]): void {
     const args = this.registry.get(className) ?? [];
     args.push(...newArgs);
     this.registry.set(className, args);
@@ -58,7 +55,7 @@ export class Container {
    * @param className The class to modify.
    * @param args The new arguments to provide to the class's constructor.
    */
-  replaceArgs(className: Constructor, ...args: unknown[]): void {
+  replaceArgs(className: Constructor, ...args: any[]): void {
     this.registry.set(className, args);
   }
 
