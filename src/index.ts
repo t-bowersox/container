@@ -1,3 +1,5 @@
+import { ContainerError } from "./lib/container-error";
+
 export type Constructor<T = any> = { new (...args: any[]): T };
 export type ServiceRegistry = WeakMap<Constructor, any[]>;
 
@@ -45,17 +47,14 @@ export class Container {
    * @param newArgs The new arguments to append to the existing arguments array.
    */
   appendArgs(className: Constructor, ...newArgs: any[]): void {
-    const args = this.registry.get(className) ?? [];
-    args.push(...newArgs);
-    this.registry.set(className, args);
-  }
+    if (!this.has(className)) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
 
-  /**
-   * Replaces a class's arguments.
-   * @param className The class to modify.
-   * @param args The new arguments to provide to the class's constructor.
-   */
-  replaceArgs(className: Constructor, ...args: any[]): void {
+    const args = this.registry.get(className) as any[]; // can never be undefined in `add()`
+    args.push(...newArgs);
     this.registry.set(className, args);
   }
 
@@ -78,23 +77,30 @@ export class Container {
     }
 
     // Otherwise, build a brand new instance.
-    const args = this.registry.get(className) ?? [];
+    const args = this.registry.get(className);
+    if (!args) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
+
     const preparedArgs = args.map((arg) => {
       if (typeof arg != "function") {
         return arg;
       }
 
+      // Try: is the function a constructor? If not, a TypeError will be thrown.
       try {
-        // Try: is the function a constructor?
-        // If not, a TypeError will be thrown.
-        // Otherwise, either retrieve it from the container, or call it.
-        const maybeConstructor = arg as Constructor;
-        const registered = this.get(maybeConstructor);
-        return registered ? registered : new maybeConstructor();
+        new arg();
       } catch (error) {
-        // If the function is not a constructor, then return it as a callback argument.
+        // In that case, return it as a callback argument.
         return arg;
       }
+
+      // Otherwise, try to retrieve it from the container.
+      const maybeConstructor = arg as Constructor;
+      const registered = this.get(maybeConstructor);
+      return registered;
     });
 
     return new className(...preparedArgs);
@@ -105,6 +111,42 @@ export class Container {
    * @param className The class to remove.
    */
   delete(className: Constructor): void {
+    if (!this.has(className)) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
     this.registry.delete(className);
+  }
+
+  /**
+   * Removes a static instance from the container.
+   * @param className The class to remove.
+   */
+  deleteStatic(className: Constructor): void {
+    if (!this.hasStatic(className)) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
+    this.instances.delete(className);
+  }
+
+  /**
+   * Checks for the presence of a class in the registry.
+   * @param className The class to look for.
+   * @returns `true` if found, `false` if not.
+   */
+  has(className: Constructor): boolean {
+    return this.registry.has(className);
+  }
+
+  /**
+   * Checks for the presence of a static instance in the container.
+   * @param className The class to look for.
+   * @returns `true` if found, `false` if not.
+   */
+  hasStatic(className: Constructor): boolean {
+    return this.instances.has(className);
   }
 }

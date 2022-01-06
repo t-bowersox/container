@@ -41,6 +41,7 @@
     "build": "tsc",
     "lint": "eslint src",
     "format": "prettier --write src",
-    "test": "jest --silent"
+    "test": "jest",
+    "test:watch": "jest --watch"
   }
 }
