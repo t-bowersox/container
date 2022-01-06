@@ -53,12 +53,8 @@ export class Container {
       );
     }
 
-  /**
-   * Replaces a class's arguments.
-   * @param className The class to modify.
-   * @param args The new arguments to provide to the class's constructor.
-   */
-  replaceArgs(className: Constructor, ...args: any[]): void {
+    const args = this.registry.get(className) as any[]; // can never be undefined in `add()`
+    args.push(...newArgs);
     this.registry.set(className, args);
   }
 
