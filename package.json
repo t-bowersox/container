@@ -42,5 +42,6 @@
     "lint": "eslint src",
     "format": "prettier --write src",
     "test": "jest",
+    "test:watch": "jest --watch"
   }
 }
