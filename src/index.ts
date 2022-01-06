@@ -141,4 +141,12 @@ export class Container {
     return this.registry.has(className);
   }
 
+  /**
+   * Checks for the presence of a static instance in the container.
+   * @param className The class to look for.
+   * @returns `true` if found, `false` if not.
+   */
+  hasStatic(className: Constructor): boolean {
+    return this.instances.has(className);
+  }
 }
