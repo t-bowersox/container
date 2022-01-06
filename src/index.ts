@@ -1,3 +1,5 @@
+import { ContainerError } from "./lib/container-error";
+
 export type Constructor<T = any> = { new (...args: any[]): T };
 export type ServiceRegistry = WeakMap<Constructor, any[]>;
 
@@ -45,10 +47,11 @@ export class Container {
    * @param newArgs The new arguments to append to the existing arguments array.
    */
   appendArgs(className: Constructor, ...newArgs: any[]): void {
-    const args = this.registry.get(className) ?? [];
-    args.push(...newArgs);
-    this.registry.set(className, args);
-  }
+    if (!this.has(className)) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
 
   /**
    * Replaces a class's arguments.
@@ -78,7 +81,13 @@ export class Container {
     }
 
     // Otherwise, build a brand new instance.
-    const args = this.registry.get(className) ?? [];
+    const args = this.registry.get(className);
+    if (!args) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
+
     const preparedArgs = args.map((arg) => {
       if (typeof arg != "function") {
         return arg;
@@ -105,6 +114,16 @@ export class Container {
    * @param className The class to remove.
    */
   delete(className: Constructor): void {
+    if (!this.has(className)) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
     this.registry.delete(className);
   }
+    if (!this.hasStatic(className)) {
+      throw new ContainerError(
+        `${className.name} is not registered in container.`
+      );
+    }
 }

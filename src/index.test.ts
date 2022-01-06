@@ -1,4 +1,5 @@
 import { Container } from ".";
+import { ContainerError } from "./lib/container-error";
 
 class NoArgs {}
 
@@ -76,7 +77,7 @@ describe("#Container", () => {
       const appendToUnregistered = () => {
         return container.appendArgs(PrimitiveArgs);
       };
-      expect(appendToUnregistered).toThrow();
+      expect(appendToUnregistered).toThrow(ContainerError);
     });
   });
 
@@ -129,12 +130,12 @@ describe("#Container", () => {
       const getUnregisteredArgs = () => {
         return container.get(ClassArgs);
       };
-      expect(getUnregisteredArgs).toThrow();
+      expect(getUnregisteredArgs).toThrow(ContainerError);
 
       const getUnregisteredClass = () => {
         return container.get(NoArgs);
       };
-      expect(getUnregisteredClass).toThrow();
+      expect(getUnregisteredClass).toThrow(ContainerError);
     });
 
     test("returns non-constructor functions as callback arguments", () => {
@@ -156,7 +157,7 @@ describe("#Container", () => {
       const deleteUnregistered = () => {
         return container.delete(NoArgs);
       };
-      expect(deleteUnregistered).toThrow();
+      expect(deleteUnregistered).toThrow(ContainerError);
     });
   });
 
@@ -171,7 +172,7 @@ describe("#Container", () => {
       const deleteUnregistered = () => {
         return container.deleteStatic(NoArgs);
       };
-      expect(deleteUnregistered).toThrow();
+      expect(deleteUnregistered).toThrow(ContainerError);
     });
   });
 
