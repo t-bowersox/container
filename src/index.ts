@@ -132,4 +132,13 @@ export class Container {
     this.instances.delete(className);
   }
 
+  /**
+   * Checks for the presence of a class in the registry.
+   * @param className The class to look for.
+   * @returns `true` if found, `false` if not.
+   */
+  has(className: Constructor): boolean {
+    return this.registry.has(className);
+  }
+
 }
