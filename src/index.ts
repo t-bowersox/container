@@ -118,9 +118,18 @@ export class Container {
     }
     this.registry.delete(className);
   }
+
+  /**
+   * Removes a static instance from the container.
+   * @param className The class to remove.
+   */
+  deleteStatic(className: Constructor): void {
     if (!this.hasStatic(className)) {
       throw new ContainerError(
         `${className.name} is not registered in container.`
       );
     }
+    this.instances.delete(className);
+  }
+
 }
