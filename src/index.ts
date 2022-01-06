@@ -89,17 +89,18 @@ export class Container {
         return arg;
       }
 
+      // Try: is the function a constructor? If not, a TypeError will be thrown.
       try {
-        // Try: is the function a constructor?
-        // If not, a TypeError will be thrown.
-        // Otherwise, either retrieve it from the container, or call it.
-        const maybeConstructor = arg as Constructor;
-        const registered = this.get(maybeConstructor);
-        return registered ? registered : new maybeConstructor();
+        new arg();
       } catch (error) {
-        // If the function is not a constructor, then return it as a callback argument.
+        // In that case, return it as a callback argument.
         return arg;
       }
+
+      // Otherwise, try to retrieve it from the container.
+      const maybeConstructor = arg as Constructor;
+      const registered = this.get(maybeConstructor);
+      return registered;
     });
 
     return new className(...preparedArgs);
