@@ -1,4 +1,4 @@
-import { ContainerError } from "./lib/container-error";
+import { ContainerError } from "./lib/container-error.js";
 
 export type Constructor<T = any> = { new (...args: any[]): T };
 export type ServiceRegistry = WeakMap<Constructor, any[]>;
