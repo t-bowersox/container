@@ -60,8 +60,7 @@ export class Container {
 
   /**
    * Reurns an instance of a class from the container. If the class was registered using
-   * `addStatic()`, a singleton instance will be returned with each call to `get`.
-   * Otherwise, a new instance will be created.
+   * `addStatic()`, a singleton instance will be returned with each call to `get()`.
    *
    * If a class depends on another class added to the container, it will build an instance
    * of it using the stored arguments and inject it as a dependency. If a class was registered
