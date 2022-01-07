@@ -135,6 +135,16 @@ container.hasStatic(DatabaseService); // true
 
 ### Class: `Container`
 
+The `Container` class is responsible for creating container instances. This is the primary component of the API.
+
+```typescript
+class Container {
+  constructor() {}
+}
+```
+
+---
+
 #### Method: `add`
 
 Adds a class and its constructor arguments to the container. Each time `get()` is called, a new instance of the class will be returned.
