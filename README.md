@@ -296,6 +296,18 @@ hasStatic(className: Constructor): boolean;
 - `true` if the container has a static instance of that class.
 - `false` if the container does not have a static instance of that class.
 
+---
+
+### Class: `ContainerError`
+
+The `ContainerError` class is thrown by `Container` in cases when the class passed to `appendArgs()`, `get()`, `delete()`, or `delete()` have not been added to the container.
+
+```typescript
+class ContainerError extends Error {
+  constructor(message: string);
+}
+```
+
 ## Contributing
 
 This is primarily a package that I intend to reuse in my own projects. I've decided to open source it in case there are other folks who might also find it useful.
