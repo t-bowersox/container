@@ -2,6 +2,10 @@
 
 A dependency injection container built with TypeScript, with a simple API and (ironcially) zero dependencies.
 
+```bash
+npm i @t-bowersox/container
+```
+
 ## Usage
 
 ### Create a new container
