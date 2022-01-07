@@ -12,9 +12,11 @@ import { Container } from "@t-bowersox/container";
 const container = new Container();
 ```
 
+---
+
 ### Add a class or static instance
 
-You can add either a class or a static instance of a class to your container.
+You can add both classes and static instances of classes to your container.
 
 - Use `add()` to add a class. With this method, a new instance of that class will be returned each time the class is retrieved.
 - Use `addStatic()` to add a static instance of a class. With this method, the same instance will be returned each time the class is retrieved.
@@ -52,6 +54,8 @@ If you add `DatabaseService` as a static instance, it will not only be injected 
 
 This could, for example, allow you to call the database's `connect()` and `disconnect()` methods before you start calling the repository to add users, etc.
 
+---
+
 ### Append arguments to an added class
 
 Use the `appendArgs()` method to add arguments to a class that has already been added to your container.
@@ -64,6 +68,8 @@ class TokenService {
 container.add(TokenService, "private-key-here");
 container.appendArgs(TokenService, "public-key-here");
 ```
+
+---
 
 ### Get a class instance from the container
 
@@ -97,6 +103,8 @@ This process is recursive, so if that dependency has other dependencies in your 
 
 If the class has not been added to the container, the container will throw a `ContainerError`.
 
+---
+
 ### Delete a class or static instance
 
 To remove a class from the container, use `delete()`. To remove a static instance from the container, use `deleteStatic()` instead.
@@ -105,6 +113,8 @@ To remove a class from the container, use `delete()`. To remove a static instanc
 container.delete(TokenService);
 container.deleteStatic(DatabaseService);
 ```
+
+---
 
 ### Check if a container has a class or static instance
 
@@ -142,6 +152,8 @@ add<T extends Constructor>(newClass: T, ...args: any[]): Container;
 
 The container object returns itself, allowing chaining multiple calls to `add()` and/or `addStatic()`.
 
+---
+
 #### Method: `addStatic`
 
 Adds a static instance of a class to the container. Instead of creating a new instance each time `get()` is called, that single instance will be returned instead.
@@ -159,6 +171,8 @@ addStatic<T extends Constructor>(className: T, ...args: any[]): Container;
 
 The container object returns itself, allowing chaining multiple calls to `add()` and/or `addStatic()`.
 
+---
+
 #### Method: `appendArgs`
 
 Appends arguments to a class's existing arguments array.
@@ -175,6 +189,8 @@ appendArgs(className: Constructor, ...newArgs: any[]): void;
 **Throws**
 
 - `ContainerError` if `className` has not been added to the container.
+
+---
 
 #### Method: `get`
 
@@ -198,6 +214,8 @@ An instance of the provided `className`.
 
 - `ContainerError` if `className` has not been added to the container.
 
+---
+
 #### Method: `delete`
 
 Removes a class (registered using `add()`) from the container.
@@ -213,6 +231,8 @@ delete(className: Constructor): void;
 **Throws**
 
 - `ContainerError` if `className` has not been added to the container.
+
+---
 
 #### Method: `deleteStatic`
 
@@ -230,6 +250,8 @@ deleteStatic(className: Constructor): void;
 
 - `ContainerError` if `className` has not been added to the container.
 
+---
+
 #### Method: `has`
 
 Checks for the presence of a class in the registry.
@@ -246,6 +268,8 @@ has(className: Constructor): boolean;
 
 - `true` if the class has been added to the container.
 - `false` if the class has not been added to the container.
+
+---
 
 #### Method: `hasStatic`
 
