@@ -308,6 +308,18 @@ class ContainerError extends Error {
 }
 ```
 
+---
+
+### Type: `Constructor`
+
+The `Constructor` type represents a class constructor function. When you pass a class to a container function, you are actually passing the constructor.
+
+```typescript
+type Constructor<T = any> = {
+  new (...args: any[]): T;
+};
+```
+
 ## Contributing
 
 This is primarily a package that I intend to reuse in my own projects. I've decided to open source it in case there are other folks who might also find it useful.
