@@ -1,7 +1,7 @@
 {
   "name": "@t-bowersox/container",
   "description": "A dependency injection container with a simple API.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
@@ -43,5 +43,8 @@
     "format": "prettier --write src",
     "test": "jest",
     "test:watch": "jest --watch"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
