@@ -1,5 +1,5 @@
 {
-  "name": "container",
+  "name": "@t-bowersox/container",
   "description": "A dependency injection container with a simple API.",
   "version": "0.1.0",
   "main": "dist/index.js",
