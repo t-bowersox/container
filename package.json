@@ -1,7 +1,7 @@
 {
   "name": "@t-bowersox/container",
   "description": "A dependency injection container with a simple API.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "dist/common/index.js",
   "module": "dist/esm/index.js",
   "exports": {
