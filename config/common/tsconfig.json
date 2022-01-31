@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     /* Language and Environment */
     "target": "es2015",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
@@ -9,8 +9,8 @@
     "module": "CommonJS",                                  /* Specify what module code is generated. */
     
     /* Emit */
-    "outDir": "dist/common",                             /* Specify an output folder for all emitted files. */
+    "outDir": "../../dist/common",                             /* Specify an output folder for all emitted files. */
   },
-  "include": ["src/**/*"],
-  "exclude": ["**/*.test.ts"]
+  "include": ["../../src/**/*"],
+  "exclude": ["../../src/**/*.test.ts"]
 }
