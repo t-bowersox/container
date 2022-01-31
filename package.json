@@ -1,8 +1,15 @@
 {
   "name": "@t-bowersox/container",
   "description": "A dependency injection container with a simple API.",
-  "version": "1.0.1",
-  "main": "dist/index.js",
+  "version": "1.1.0",
+  "main": "dist/common/index.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/common/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/t-bowersox/container.git"
@@ -38,11 +45,13 @@
   },
   "scripts": {
     "watch": "tsc --watch",
-    "build": "tsc",
+    "build": "tsc && tsc --project tsconfig.common.json && npm run package:common && npm run package:esm",
     "lint": "eslint src",
     "format": "prettier --write src",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "package:common": "cp package.common.json dist/common/package.json",
+    "package:esm": "cp package.esm.json dist/esm/package.json"
   },
   "files": [
     "dist"
