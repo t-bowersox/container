@@ -27,7 +27,6 @@
     "url": "https://github.com/t-bowersox/container/issues"
   },
   "homepage": "https://github.com/t-bowersox/container#readme",
-  "type": "module",
   "devDependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
