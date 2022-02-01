@@ -1,5 +1,3 @@
-import { ContainerError } from "./lib/container-error";
-
 export type Constructor<T = any> = { new (...args: any[]): T };
 export type ServiceRegistry = WeakMap<Constructor, any[]>;
 
@@ -147,5 +145,13 @@ export class Container {
    */
   hasStatic(className: Constructor): boolean {
     return this.instances.has(className);
+  }
+}
+
+export class ContainerError extends Error {
+  name = "ContainerError";
+
+  constructor(public message: string) {
+    super();
   }
 }

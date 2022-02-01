@@ -1,5 +1,5 @@
-import { Container } from ".";
-import { ContainerError } from "./lib/container-error";
+import { Container } from "./index";
+import { ContainerError } from "./index";
 
 class NoArgs {}
 
